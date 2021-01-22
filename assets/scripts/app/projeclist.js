@@ -1,5 +1,7 @@
-import { ProjectItem } from './projectitem.js'
-import { DOMHelper } from '../utility/domhelper.js'
+import { ProjectItem as PrjItem } from './projectitem.js'
+import * as DOMH from '../utility/domhelper.js'
+
+
 
 export class ProjectList {
   projects = [];
@@ -9,7 +11,7 @@ export class ProjectList {
     const prjItems = document.querySelectorAll(`#${type}-projects li`);
     for (const prjItem of prjItems) {
       this.projects.push(
-        new ProjectItem(prjItem.id, this.switchProject.bind(this), this.type)
+        new PrjItem(prjItem.id, this.switchProject.bind(this), this.type)
       );
     }
     console.log(this.projects);
@@ -58,7 +60,7 @@ export class ProjectList {
 
   addProject(project) {
     this.projects.push(project);
-    DOMHelper.moveElement(project.id, `#${this.type}-projects ul`);
+    DOMH.moveElement(project.id, `#${this.type}-projects ul`);
     project.update(this.switchProject.bind(this), this.type);
   }
 
